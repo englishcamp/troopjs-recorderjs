@@ -75,14 +75,19 @@ require.config({
     }
   },
   callback: function loadDeps() {
-    require([
-      'jquery',
-      'troopjs-dom/application/widget',
-      'example/widget/main',
-      'example/widget/volume'
-    ], function Bootstrap(jQuery, Application) {
-      jQuery(function ready($) {
+  require([
+    'jquery',
+    'troopjs-recorder/service/recorder',
+    'troopjs-dom/application/widget',
+    'example/widget/main',
+    'example/widget/volume'
+  ], function Bootstrap(jQuery, record_service, Application) {
+    jQuery(function ready($) {
+
+      record_service.then(function () {
         Application($('html'), 'bootstrap').start();
+      }).otherwise(function (err) {
+        $('body').html('Unsupported ' + (('browser' in err.reason) ? 'browser' : 'Flash version'));
       });
     });
   }
