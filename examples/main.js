@@ -63,7 +63,7 @@ require.config({
   config: {
     // Configure recording audio upload server.
     'troopjs-recorder/service/recorder': {
-      upload:{
+      upload: {
         method: 'POST',
         audioParam: "file",
         audioFormat: 1,
@@ -75,19 +75,20 @@ require.config({
     }
   },
   callback: function loadDeps() {
-  require([
-    'jquery',
-    'troopjs-recorder/service/recorder',
-    'troopjs-dom/application/widget',
-    'example/widget/main',
-    'example/widget/volume'
-  ], function Bootstrap(jQuery, record_service, Application) {
-    jQuery(function ready($) {
+    require([
+      'jquery',
+      'troopjs-recorder/service/recorder',
+      'troopjs-dom/application/widget',
+      'example/widget/main',
+      'example/widget/volume'
+    ], function Bootstrap(jQuery, record_service, Application) {
+      jQuery(function ready($) {
 
-      record_service.then(function () {
-        Application($('html'), 'bootstrap').start();
-      }).otherwise(function (err) {
-        $('body').html('Unsupported ' + (('browser' in err.reason) ? 'browser' : 'Flash version'));
+        record_service.then(function () {
+          Application($('html'), 'bootstrap').start();
+        }).otherwise(function (err) {
+          $('body').html('Unsupported ' + (('browser' in err.reason) ? 'browser' : 'Flash version'));
+        });
       });
     });
   }
